@@ -6,10 +6,8 @@
 k_username=super
 
 # 增加用户
-passwd root
 groupadd ${k_username}
 useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
-passwd ${k_username}
 gpasswd -a ${k_username} sudo
 
 # 安装基础应用
@@ -96,4 +94,3 @@ rm -rf /tmp/*
 dpkg --configure -a
 
 exit 0
-

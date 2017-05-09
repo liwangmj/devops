@@ -3,36 +3,31 @@
 #
 # Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
 
-k_username=super
-
-# 增加用户
-groupadd ${k_username}
-useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
+k_username=ubuntu
 
 # 安装基础应用
-yum -y install epel-release net-tools wget curl
-yum -y update && yum -y upgrade && yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua lua-devel luajit luajit-devel luarocks python python-devel python-setuptools python-pip valgrind gdb tcpdump nload git svn ntpdate cronie openssh-server watchdog
+apt-get -y install net-tools wget curl
+apt-get -y update && apt-get -y upgrade && apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
+update-alternatives --config nc
 pip install --upgrade setuptools pip
-pip install --upgrade backports.ssl_match_hostname
 
 # 安装docker相关
+apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
+apt-get -y install apt-transport-https ca-certificates
 curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-yum -y update && yum -y upgrade
+apt-get -y update && apt-get -y upgrade
 pip install docker-compose
-chkconfig --add docker
-chkconfig docker on
-service docker start
+systemctl enable docker.service
+systemctl start docker.service
+gpasswd -a ${k_username} docker
 
 # 关闭防火墙
-setenforce 0
-sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
-service firewalld stop
-chkconfig firewalld off
+ufw disable
 
 # 配置aliyun的docker加速器
-if [[ -z "$(cat /etc/sysconfig/docker | grep aliyuncs)" ]]; then
-    sed -i "s|OPTIONS='|OPTIONS='--registry-mirror=https://rbhx2eui.mirror.aliyuncs.com |g" /etc/sysconfig/docker
-    service docker restart
+if [[ -z "$(cat /etc/default/docker | grep aliyuncs)" ]]; then
+    echo "DOCKER_OPTS=\"$DOCKER_OPTS --registry-mirror=https://rbhx2eui.mirror.aliyuncs.com\"" >> /etc/default/docker
+    systemctl restart docker.service
 fi
 
 # 配置ulimit
@@ -73,22 +68,12 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     sed -i 's/#PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config
     echo 'sshd:all' >> /etc/hosts.deny
     echo 'sshd:all' >> /etc/hosts.allow
-    chkconfig --add sshd
-    chkconfig sshd on
-    service sshd restart
+    systemctl enable sshd.service
+    systemctl restart sshd.service
 fi
 
-# 设置ssh公钥并发送私钥
-su - ${k_username} <<-'EOF'
-rm -rf ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 -R ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-EOF
-
 # 清理
-yum clean all
+apt-get clean && apt-get autoclean
 rm -rf /tmp/*
 
 exit 0

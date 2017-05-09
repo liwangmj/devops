@@ -3,11 +3,7 @@
 #
 # Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
 
-k_username=super
-
-# 增加用户
-groupadd ${k_username}
-useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
+k_username=centos
 
 # 安装基础应用
 yum -y install epel-release net-tools wget curl
@@ -77,15 +73,6 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     chkconfig sshd on
     service sshd restart
 fi
-
-# 设置ssh公钥并发送私钥
-su - ${k_username} <<-'EOF'
-rm -rf ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 -R ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-EOF
 
 # 清理
 yum clean all

@@ -8,7 +8,7 @@ k_username=wim
 # 安装基础应用
 pacman -Syyu
 # yaourt -S base-devel perl lua51 python2 vim gimp fcitx unzip wget curl epdfview
-yaourt -S docker docker-compose cmake git svn android-studio android-sdk android-ndk valgrind gdb luajit python3 python-pip python2-pip adobe-source-code-pro-fonts wqy-microhei atom eclipse qtcreator kdesvn gitkraken mysql-workbench mysql-utilities dbeaver-ee freerdp remmina gnu-netcat wireshark-qt nload tcpdump packetsender chromium firefox filezilla wps-office dia pencil xmind vlc thunderbird electronic-wechat nutstore fcitx-configtool fcitx-sogoupinyin kcm-fcitx fcitx-im shutter lrzsz tmux leafpad calc wine winetricks youdao-dict create_ap create_ap-gui meld doxygen graphviz teamviewer shadowsocks-qt5 shadowsocks dos2unix
+yaourt -S docker docker-compose cmake git svn android-studio android-sdk android-ndk valgrind gdb luajit python3 python-pip python2-pip adobe-source-code-pro-fonts wqy-microhei atom eclipse-jee qtcreator kdesvn gitkraken mysql-workbench mysql-utilities dbeaver-ee freerdp remmina gnu-netcat wireshark-qt nload tcpdump packetsender chromium firefox filezilla wps-office dia pencil xmind vlc thunderbird electronic-wechat nutstore fcitx-configtool fcitx-sogoupinyin kcm-fcitx fcitx-im shutter lrzsz tmux leafpad calc wine winetricks youdao-dict create_ap create_ap-gui meld doxygen graphviz teamviewer shadowsocks-qt5 shadowsocks dos2unix
 
 pip2 install --upgrade setuptools pip
 
@@ -133,4 +133,3 @@ pacman -Scc
 rm -rf /tmp/*
 
 exit 0
-

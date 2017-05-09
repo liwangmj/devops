@@ -8,7 +8,6 @@ k_username=super
 # 增加用户
 groupadd ${k_username}
 useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
-passwd ${k_username}
 
 # 安装基础应用
 yum -y install epel-release net-tools wget curl
@@ -91,4 +90,3 @@ yum clean all
 rm -rf /tmp/*
 
 exit 0
-

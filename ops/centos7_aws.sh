@@ -3,11 +3,7 @@
 #
 # Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
 
-k_username=super
-
-# 增加用户
-groupadd ${k_username}
-useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
+k_username=centos
 
 # 安装基础应用
 yum -y install epel-release net-tools wget curl
@@ -19,20 +15,19 @@ pip install --upgrade backports.ssl_match_hostname
 curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
 yum -y update && yum -y upgrade
 pip install docker-compose
-chkconfig --add docker
-chkconfig docker on
-service docker start
+systemctl enable docker.service
+systemctl start docker.service
 
 # 关闭防火墙
 setenforce 0
 sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
-service firewalld stop
-chkconfig firewalld off
+systemctl stop firewalld.service
+systemctl disable firewalld.service
 
 # 配置aliyun的docker加速器
 if [[ -z "$(cat /etc/sysconfig/docker | grep aliyuncs)" ]]; then
     sed -i "s|OPTIONS='|OPTIONS='--registry-mirror=https://rbhx2eui.mirror.aliyuncs.com |g" /etc/sysconfig/docker
-    service docker restart
+    systemctl restart docker.service
 fi
 
 # 配置ulimit
@@ -73,19 +68,9 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     sed -i 's/#PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config
     echo 'sshd:all' >> /etc/hosts.deny
     echo 'sshd:all' >> /etc/hosts.allow
-    chkconfig --add sshd
-    chkconfig sshd on
-    service sshd restart
+    systemctl enable sshd.service
+    systemctl restart sshd.service
 fi
-
-# 设置ssh公钥并发送私钥
-su - ${k_username} <<-'EOF'
-rm -rf ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 -R ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-EOF
 
 # 清理
 yum clean all
