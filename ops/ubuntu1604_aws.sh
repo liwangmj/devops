@@ -10,6 +10,7 @@ apt-get -y install net-tools wget curl
 apt-get -y update && apt-get -y upgrade && apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
 update-alternatives --config nc
 pip install --upgrade setuptools pip
+pip install --upgrade backports.ssl_match_hostname
 
 # 安装docker相关
 apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual

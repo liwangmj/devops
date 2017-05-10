@@ -11,6 +11,7 @@ pacman -Syyu
 yaourt -S docker docker-compose cmake git svn android-studio android-sdk android-ndk valgrind gdb luajit python3 python-pip python2-pip adobe-source-code-pro-fonts wqy-microhei atom eclipse-jee qtcreator kdesvn gitkraken mysql-workbench mysql-utilities dbeaver-ee freerdp remmina gnu-netcat wireshark-qt nload tcpdump packetsender chromium firefox filezilla wps-office dia pencil xmind vlc thunderbird electronic-wechat nutstore fcitx-configtool fcitx-sogoupinyin kcm-fcitx fcitx-im shutter lrzsz tmux leafpad calc wine winetricks youdao-dict create_ap create_ap-gui meld doxygen graphviz teamviewer shadowsocks-qt5 shadowsocks dos2unix
 
 pip2 install --upgrade setuptools pip
+pip install --upgrade backports.ssl_match_hostname
 
 systemctl enable docker.service
 systemctl start docker.service
