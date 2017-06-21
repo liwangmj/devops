@@ -1,11 +1,11 @@
 version: '2'
 services:
     app:
-        image: registry.cn-hangzhou.aliyuncs.com/own/blog-post:latest
+        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/blog-post:latest
         container_name: blog
         restart: always
         volumes:
-            - /persistent_data/own/blog/hexo/logs:/www/own/blog/hexo/logs
+            - /persistent_data/liwangmj/blog/hexo/logs:/www/liwangmj/blog/hexo/logs
         network_mode: "host"
         dns:
             - 114.114.114.114
