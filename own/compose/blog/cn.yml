@@ -1,0 +1,18 @@
+version: '2'
+services:
+    app:
+        image: registry.cn-hangzhou.aliyuncs.com/own/blog-post:latest
+        container_name: blog
+        restart: always
+        volumes:
+            - /persistent_data/own/blog/hexo/logs:/www/own/blog/hexo/logs
+        network_mode: "host"
+        dns:
+            - 114.114.114.114
+            - 114.114.115.115
+        expose:
+            - "80"
+            - "443"
+        ports:
+            - "127.0.0.1:80:80"
+            - "127.0.0.1:443:443"
