@@ -17,7 +17,7 @@ function del_common() {
 function del_help() {
     echo "[error] unknown args: $1"
     echo "please input args, example './reup.sh blog cn'"
-    echo "arg1: 'blog'"
+    echo "arg1: 'blog' 'blog-redis'"
     echo "arg2: 'cn' 'asia'"
     echo "arg2 default is 'cn'"
     exit 0
