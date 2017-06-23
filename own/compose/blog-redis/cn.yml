@@ -1,7 +1,7 @@
 version: '2'
 services:
     cache:
-        image: registry.cn-hangzhou.aliyuncs.com/basic/blog-redis:latest
+        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/blog-redis:latest
         container_name: blog-redis
         restart: always
         volumes:

@@ -25,7 +25,8 @@ function del_help() {
 
 [[ -z "${1-}" ]]
 case $1 in
-    blog) ;;
+    blog \
+    | blog-redis) ;;
     *) del_help "$0" ;;
 esac
 
