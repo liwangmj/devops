@@ -30,7 +30,7 @@ function reup_help() {
 [[ -z "${1-}" ]]
 case $1 in
     blog \
-    | blog-redis
+    | blog-redis \
     | intellij-idea-license-server) ;;
     *) reup_help "$0" ;;
 esac
