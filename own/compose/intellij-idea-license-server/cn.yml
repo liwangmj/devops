@@ -1,0 +1,14 @@
+version: '2'
+services:
+    app:
+        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/intellij-idea-license-server:latest
+        container_name: intellij-idea-license-server
+        restart: always
+        network_mode: "host"
+        dns:
+            - 114.114.114.114
+            - 114.114.115.115
+        expose:
+            - "1017"
+        ports:
+            - "127.0.0.1:1017:1017"
