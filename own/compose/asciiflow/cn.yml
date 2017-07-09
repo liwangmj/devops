@@ -1,0 +1,14 @@
+version: '2'
+services:
+    app:
+        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/asciiflow:latest
+        container_name: asciiflow
+        restart: always
+        network_mode: "host"
+        dns:
+            - 114.114.114.114
+            - 114.114.115.115
+        expose:
+            - "10100"
+        ports:
+            - "127.0.0.1:10100:101000"

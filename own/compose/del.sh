@@ -17,7 +17,7 @@ function del_common() {
 function del_help() {
     echo "[error] unknown args: $1"
     echo "please input args, example './reup.sh blog cn'"
-    echo "arg1: 'blog' 'blog-redis' 'intellij-idea-license-server'"
+    echo "arg1: 'blog' 'blog-redis' 'asciiflow' 'intellij-idea-license-server'"
     echo "arg2: 'cn' 'asia'"
     echo "arg2 default is 'cn'"
     exit 0
@@ -27,6 +27,7 @@ function del_help() {
 case $1 in
     blog \
     | blog-redis \
+    | asciiflow \
     | intellij-idea-license-server) ;;
     *) del_help "$0" ;;
 esac

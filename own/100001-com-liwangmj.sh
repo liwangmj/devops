@@ -4,14 +4,16 @@ function deploy_common() {
     cd $(dirname $0)/compose
 
     if [[ "${1}" == "del" ]]; then
+        ./del.sh asciiflow cn
+        ./del.sh intellij-idea-license-server cn
         ./del.sh blog-redis cn
         ./del.sh blog cn
-        ./del.sh intellij-idea-license-server
 
     else
+        ./reup.sh asciiflow cn
+        ./reup.sh intellij-idea-license-server cn
         ./reup.sh blog-redis cn
         ./reup.sh blog cn
-        ./reup.sh intellij-idea-license-server
     fi
 
 }
