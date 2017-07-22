@@ -21,7 +21,7 @@ function reup_common() {
 function reup_help() {
     echo "[error] unknown args: $1"
     echo "please input args, example './reup.sh blog cn'"
-    echo "arg1: 'blog' 'blog-redis' 'asciiflow' 'intellij-idea-license-server'"
+    echo "arg1: 'blog' 'blog-redis' 'asciiflow' 'intellij-idea-license-server' 'webide' "
     echo "arg2: 'cn' 'asia'"
     echo "arg2 default is 'cn'"
     exit 0
@@ -32,6 +32,7 @@ case $1 in
     blog \
     | blog-redis \
     | asciiflow \
+    | webide \
     | intellij-idea-license-server) ;;
     *) reup_help "$0" ;;
 esac

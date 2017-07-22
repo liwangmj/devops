@@ -6,12 +6,14 @@ function deploy_common() {
     if [[ "${1}" == "del" ]]; then
         ./del.sh asciiflow cn
         ./del.sh intellij-idea-license-server cn
+        ./del.sh webide cn
         ./del.sh blog-redis cn
         ./del.sh blog cn
 
     else
         ./reup.sh asciiflow cn
         ./reup.sh intellij-idea-license-server cn
+        ./reup.sh webide cn
         ./reup.sh blog-redis cn
         ./reup.sh blog cn
     fi

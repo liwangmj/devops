@@ -1,0 +1,16 @@
+version: '2'
+services:
+    app:
+        image: registry.cn-hangzhou.aliyuncs.com/basic/mirror-webide:latest
+        container_name: webide
+        restart: always
+        volumes:
+            - /persistent_data/liwangmj/webide/.coding-ide-home:/home/coding/.coding-ide-home
+        network_mode: "host"
+        dns:
+            - 114.114.114.114
+            - 114.114.115.115
+        expose:
+            - "8080"
+        ports:
+            - "127.0.0.1:8080:8080"
