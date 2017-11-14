@@ -7,11 +7,11 @@ k_username=wim
 
 # 安装基础应用
 pacman -Syyu
-# yaourt -S base-devel perl lua51 python2 vim gimp fcitx unzip unrar curl epdfview
-yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip adobe-source-code-pro-fonts wqy-microhei xmind gvim atom eclipse-jee netbeans qtcreator mysql-workbench mysql-utilities freerdp remmina gnu-netcat wireshark-qt lsof nload tcpdump chromium firefox filezilla dia vlc thunderbird fcitx-configtool kcm-fcitx fcitx-im lrzsz tmux leafpad calc wine winetricks create_ap create_ap-gui meld doxygen graphviz shadowsocks-qt5 shadowsocks dos2unix zip unrar wget
+# yaourt -S base-devel perl lua51 python2 vim fcitx unzip unrar curl epdfview
+yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip lsof nload tcpdump lrzsz tmux calc create_ap create_ap-gui doxygen graphviz dos2unix zip unrar wget gnu-netcat wine winetricks adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im atom eclipse-jee qtcreator mysql-workbench mysql-utilities freerdp remmina wireshark-qt meld leafpad shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird
 
 # 安装扩展应用
-# yaourt -S fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui wps-office pencil electronic-wechat gitter nutstore teamviewer youdao-dict shutter
+# yaourt -S gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui wps-office pencil electronic-wechat gitter nutstore teamviewer youdao-dict shutter freeplane wxhexeditor gvim netbeans vlc steam
 
 pip2 install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
