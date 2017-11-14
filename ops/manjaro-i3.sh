@@ -14,6 +14,7 @@ yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luaj
 # yaourt -S remmina wireshark-qt meld shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui jmeter wps-office pencil xmind electronic-wechat gitter nutstore teamviewer youdao-dict shutter wxhexeditor gvim netbeans intellij-idea-ultimate-edition pycharm-professional webstorm vlc steam
 
 # winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
+# LIBGL_DRI3_DISABLE=1 steam
 
 pip2 install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
