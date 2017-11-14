@@ -8,10 +8,12 @@ k_username=wim
 # 安装基础应用
 pacman -Syyu
 # yaourt -S base-devel perl lua51 python2 vim fcitx unzip unrar curl epdfview
-yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip lsof nload tcpdump lrzsz tmux calc create_ap create_ap-gui doxygen graphviz dos2unix zip unrar wget gnu-netcat wine winetricks adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im atom eclipse-jee qtcreator mysql-workbench mysql-utilities freerdp remmina wireshark-qt meld leafpad shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird
+yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip lsof nload tcpdump lrzsz tmux calc create_ap create_ap-gui doxygen graphviz dos2unix zip unrar wget gnu-netcat wine winetricks adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im maven gradle atom eclipse-jee qtcreator mysql-workbench mysql-utilities freerdp
 
 # 安装扩展应用
-# yaourt -S gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui wps-office pencil electronic-wechat gitter nutstore teamviewer youdao-dict shutter freeplane wxhexeditor gvim netbeans vlc steam
+# yaourt -S remmina wireshark-qt meld shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui jmeter wps-office pencil xmind electronic-wechat gitter nutstore teamviewer youdao-dict shutter wxhexeditor gvim netbeans intellij-idea-ultimate-edition pycharm-professional webstorm vlc steam
+
+# winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
 
 pip2 install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
@@ -20,7 +22,10 @@ systemctl enable docker.service
 systemctl start docker.service
 gpasswd -a ${k_username} docker
 
-winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
+# 配置git
+git config --global user.email "liwangmj@gmail.com"
+git config --global user.name "Wim Li"
+git config --global credential.helper store
 
 # 关闭机箱喇叭
 echo 'blacklist pcspkr' > /etc/modprobe.d/nopcspkr.conf
