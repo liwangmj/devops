@@ -11,7 +11,7 @@ pacman -Syyu
 yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip lsof nload tcpdump lrzsz tmux calc create_ap create_ap-gui doxygen graphviz dos2unix zip unrar wget gnu-netcat wine winetricks adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im maven gradle atom eclipse-jee qtcreator mysql-workbench mysql-utilities freerdp
 
 # 安装扩展应用
-# yaourt -S remmina wireshark-qt meld shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui jmeter appimage-git wps-office pencil freeplane drawio-desktop-bin electronic-wechat gitter nutstore teamviewer youdao-dict deepin-screenshot wxhexeditor gvim netbeans intellij-idea-ultimate-edition pycharm-professional webstorm vlc steam davinci-resolve
+# yaourt -S remmina wireshark-qt meld shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird google-webdesigner devdocs-desktop zeal gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui jmeter appimage-git wps-office pencil freeplane drawio-desktop-bin electronic-wechat gitter nutstore teamviewer youdao-dict deepin-screenshot wxhexeditor gvim netbeans intellij-idea-ultimate-edition pycharm-professional webstorm vlc steam davinci-resolve
 
 # winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
 # LIBGL_DRI3_DISABLE=1 steam
