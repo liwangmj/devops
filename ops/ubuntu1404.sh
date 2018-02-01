@@ -18,10 +18,19 @@ pip install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
 
 # 安装docker相关
+# 安装指定版本的Docker-CE:
+# Step 1: 查找Docker-CE的版本:
+# apt-cache madison docker-ce
+#   docker-ce | 17.03.1~ce-0~ubuntu-xenial | http://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial/stable amd64 Packages
+#   docker-ce | 17.03.0~ce-0~ubuntu-xenial | http://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial/stable amd64 Packages
+# Step 2: 安装指定版本的Docker-CE: (VERSION 例如上面的 17.03.1~ce-0~ubuntu-xenial)
+# sudo apt-get -y install docker-ce=[VERSION]
 apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
-apt-get -y install apt-transport-https ca-certificates
-curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+apt-get -y install apt-transport-https ca-certificates software-properties-common
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 apt-get -y update && apt-get -y upgrade
+apt-get -y install docker-ce
 pip install docker-compose
 update-rc.d docker defaults
 service docker start
@@ -86,6 +95,11 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 700 -R ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 EOF
+
+# 设置sudo
+chmod 740 /etc/sudoers
+sed -i 's/^.*%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
+chmod 0440 /etc/sudoers
 
 # 清理
 apt-get clean && apt-get autoclean
