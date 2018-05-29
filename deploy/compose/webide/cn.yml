@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-        image: registry.cn-hangzhou.aliyuncs.com/basic/mirror-webide:latest
+        image: webide/webide:latest
         container_name: webide
         restart: always
         volumes:

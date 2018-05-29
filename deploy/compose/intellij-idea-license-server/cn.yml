@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/intellij-idea-license-server:latest
+        image: daocloud.io/liwangmj/intellij-idea-license-server:latest
         container_name: intellij-idea-license-server
         restart: always
         network_mode: "host"

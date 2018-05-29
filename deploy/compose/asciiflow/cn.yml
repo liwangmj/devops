@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/asciiflow:latest
+        image: daocloud.io/liwangmj/asciiflow:latest
         container_name: asciiflow
         restart: always
         network_mode: "host"

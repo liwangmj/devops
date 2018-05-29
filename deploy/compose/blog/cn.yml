@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-        image: registry.cn-hangzhou.aliyuncs.com/liwangmj/blog-post:latest
+        image: daocloud.io/liwangmj/blog-post:latest
         container_name: blog
         restart: always
         volumes:
