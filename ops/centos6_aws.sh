@@ -47,10 +47,13 @@ service firewalld stop
 chkconfig firewalld off
 
 # 配置aliyun的docker加速器
-if [[ -z "$(cat /etc/sysconfig/docker | grep aliyuncs)" ]]; then
-    sed -i "s|OPTIONS='|OPTIONS='--registry-mirror=https://rbhx2eui.mirror.aliyuncs.com |g" /etc/sysconfig/docker
-    service docker restart
-fi
+mkdir -p /etc/docker
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://rbhx2eui.mirror.aliyuncs.com"]
+}
+EOF
+service docker restart
 
 # 配置ulimit
 if [[ -z "$(ls /etc/security/limits.d/local.conf.ibak)" ]]; then

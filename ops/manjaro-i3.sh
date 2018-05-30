@@ -23,6 +23,16 @@ systemctl enable docker.service
 systemctl start docker.service
 gpasswd -a ${k_username} docker
 
+# 配置aliyun的docker加速器
+mkdir -p /etc/docker
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://rbhx2eui.mirror.aliyuncs.com"]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker.service
+
 # 配置git
 git config --global user.email "liwangmj@gmail.com"
 git config --global user.name "Wim Li"

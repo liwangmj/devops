@@ -35,10 +35,13 @@ gpasswd -a ${k_username} docker
 ufw disable
 
 # 配置aliyun的docker加速器
-if [[ -z "$(cat /etc/default/docker | grep aliyuncs)" ]]; then
-    echo "DOCKER_OPTS=\"$DOCKER_OPTS --registry-mirror=https://rbhx2eui.mirror.aliyuncs.com\"" >> /etc/default/docker
-    service docker restart
-fi
+mkdir -p /etc/docker
+tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://rbhx2eui.mirror.aliyuncs.com"]
+}
+EOF
+service docker restart
 
 # 配置ulimit
 if [[ -z "$(ls /etc/security/limits.d/local.conf.ibak)" ]]; then
