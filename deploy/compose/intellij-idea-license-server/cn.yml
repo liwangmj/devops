@@ -4,11 +4,11 @@ services:
         image: daocloud.io/liwangmj/intellij-idea-license-server:latest
         container_name: intellij-idea-license-server
         restart: always
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
             - 114.114.115.115
         expose:
-            - "1017"
+            - '1027'
         ports:
-            - "127.0.0.1:1017:1017"
+            - '127.0.0.1:1027:1027'

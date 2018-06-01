@@ -10,18 +10,18 @@ services:
         network_mode: "host"
         dns:
             - 114.114.114.114
-            - 114.114.115.115
+            - 8.8.8.8
         expose:
-            - "80"
-            - "443"
+            - '80'
+            - '443'
         ports:
-            - "127.0.0.1:80:80"
-            - "127.0.0.1:443:443"
+            - '127.0.0.1:80:80'
+            - '127.0.0.1:443:443'
         depends_on:
-            - "blog-redis"
-            - "webide"
-            - "intellij-idea-license-server"
-            - "asciiflow"
+            - 'blog-redis'
+            - 'webide'
+            - 'intellij-idea-license-server'
+            - 'asciiflow'
     blog-redis:
         image: daocloud.io/liwangmj/blog-redis:latest
         container_name: blog-redis
@@ -33,44 +33,44 @@ services:
             - 114.114.114.114
             - 8.8.8.8
         expose:
-            - "15180"
+            - '15180'
         ports:
-            - "127.0.0.1:15180:15180"
+            - '127.0.0.1:15180:15180'
     webide:
         image: webide/webide:latest
         container_name: webide
         restart: always
         volumes:
             - /persistent_data/liwangmj/webide/.coding-ide:/root/.coding-ide
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
-            - 114.114.115.115
+            - 8.8.8.8
         expose:
-            - "8080"
+            - '8080'
         ports:
-            - "127.0.0.1:8080:8080"
+            - '127.0.0.1:8080:8080'
     intellij-idea-license-server:
         image: daocloud.io/liwangmj/intellij-idea-license-server:latest
         container_name: intellij-idea-license-server
         restart: always
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
-            - 114.114.115.115
+            - 8.8.8.8
         expose:
-            - "1017"
+            - '1027'
         ports:
-            - "127.0.0.1:1017:1017"
+            - '127.0.0.1:1027:1027'
     asciiflow:
         image: daocloud.io/liwangmj/asciiflow:latest
         container_name: asciiflow
         restart: always
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
-            - 114.114.115.115
+            - 8.8.8.8
         expose:
-            - "10100"
+            - '10100'
         ports:
-            - "127.0.0.1:10100:10100"
+            - '127.0.0.1:10100:10100'

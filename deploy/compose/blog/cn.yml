@@ -7,13 +7,13 @@ services:
         volumes:
             - /persistent_data/liwangmj/blog/hexo/logs:/www/liwangmj/blog/hexo/logs
             - /persistent_data/liwangmj/blog/hexo/certs:/www/liwangmj/blog/hexo/certs
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
             - 114.114.115.115
         expose:
-            - "80"
-            - "443"
+            - '80'
+            - '443'
         ports:
-            - "127.0.0.1:80:80"
-            - "127.0.0.1:443:443"
+            - '127.0.0.1:80:80'
+            - '127.0.0.1:443:443'

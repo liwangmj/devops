@@ -6,11 +6,11 @@ services:
         restart: always
         volumes:
             - /persistent_data/liwangmj/webide/.coding-ide:/root/.coding-ide
-        network_mode: "host"
+        network_mode: 'host'
         dns:
             - 114.114.114.114
             - 114.114.115.115
         expose:
-            - "8080"
+            - '8080'
         ports:
-            - "127.0.0.1:8080:8080"
+            - '127.0.0.1:8080:8080'
