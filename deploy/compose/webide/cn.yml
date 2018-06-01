@@ -9,7 +9,7 @@ services:
         network_mode: 'host'
         dns:
             - 114.114.114.114
-            - 114.114.115.115
+            - 8.8.8.8
         expose:
             - '8080'
         ports:
