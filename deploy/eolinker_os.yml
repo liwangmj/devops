@@ -1,0 +1,23 @@
+# 先对本地数据目录给777权限
+# 安装完需进入容器执行mysql初始化
+# service mysql stop
+# mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
+# mysql -u root mysql
+# mysql> UPDATE user SET Password=PASSWORD('eolinker_os') where USER='root';
+# mysql> FLUSH PRIVILEGES;
+# mysql> quit
+# service mysql restart
+
+version: '2'
+services:
+    DOClever:
+        image: eolinker/eolinker-api-management-system:4.0
+        restart: always
+        container_name: eolinker_os
+        ports:
+            - 80:80
+            - 3306:3306
+        volumes:
+            - /persistent_data/eolinker_os/server/RTP/config:/eolinker_os/server/RTP/config
+            - /persistent_data/eolinker_os/mysql:/usr/local/mysql/var
+        privileged: true

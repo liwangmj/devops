@@ -1,0 +1,91 @@
+# 运行成功后，需要手动初始化数据库，我们进入对象的容器来操作：
+# docker exec -it rap2-delos sh
+# node scripts/init
+# exit
+# 重新启动服务：
+# docker-compose down && docker-compose up -d
+
+version: '2'
+services:
+    delores:
+        # 容器名称
+        container_name: rap2-dolores
+
+        # 通过Dockerfile来构建本地镜像
+        # build: .
+
+        # 通过images来构建，这里的地址暂不适用，因为src/config中的配置需要根据自己的服务器来动态构建
+        # image rynxiao/rap2-dolores-nodejs
+        image: registry.cn-hangzhou.aliyuncs.com/basic/rap2-dolores:latest
+        # 指定工作目录
+        working_dir: /home/rap2-dolores
+
+        # 指定生产环境
+        environment:
+          # production / development
+          - NODE_ENV=production
+
+        # 启动http-server，并映射端口到容器内部8081上
+        command: /bin/sh -c 'http-server ./build -s -p 8081'
+        privileged: true
+
+        # expose port 38081
+        ports:
+            - '38081:8081'
+    delos:
+        container_name: rap2-delos
+        # build from ./Dockerfile
+        # build: .
+        # build from images
+        image: blackdog1987/rap2-delos:1.0.0
+        environment:
+            # if you have your own mysql, config it here, and disable the 'mysql' config blow
+            - MYSQL_URL=rap2-mysql # links will maintain /etc/hosts, just use 'container_name'
+            - MYSQL_PORT=3306
+            - MYSQL_USERNAME=root
+            - MYSQL_PASSWD=
+            - MYSQL_SCHEMA=rap2
+
+            # redis config
+            - REDIS_URL=rap2-redis
+            - REDIS_PORT=6379
+
+            # production / development
+            - NODE_ENV=production
+        working_dir: /app
+        privileged: true
+        ###### 'sleep 30 && node scripts/init' will drop the tables
+        ###### RUN ONLY ONCE THEN REMOVE 'sleep 30 && node scripts/init'
+        command: /bin/sh -c 'sleep 30; node scripts/init; node dispatch.js'
+        # init the databases
+    #    command: sleep 30 && node scripts/init && node dispatch.js
+        # without init
+    #    command: node dispatch.js
+        links:
+            - redis
+            - mysql
+        depends_on:
+            - redis
+            - mysql
+        ports:
+            - '38080:8080'  # expose 38080
+    redis:
+        container_name: rap2-redis
+        image: redis:4.0.9
+  # disable this if you have your own mysql
+    mysql:
+        container_name: rap2-mysql
+        image: mysql:5.7.22
+        # expose 33306 to client (navicat)
+        #ports:
+        #   - 33306:3306
+        volumes:
+            # change './docker/mysql/volume' to your own path
+            # WARNING: without this line, your data will be lost.
+            - /persistent_data/rap2/mysql:/var/lib/mysql
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --innodb-flush-log-at-trx-commit=0
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+            MYSQL_DATABASE: "rap2"
+            MYSQL_USER: "root"
+            MYSQL_PASSWORD: ""
