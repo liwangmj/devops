@@ -1,0 +1,12 @@
+version: '2'
+services:
+    jenkins:
+        image: jenkins/jenkins:lts
+        restart: always
+        container_name: jenkins
+        user: root
+        ports:
+            - '8080:8080'
+            - '50000:50000'
+        volumes:
+            - /persistent_data/jenkins/home:/var/jenkins_home

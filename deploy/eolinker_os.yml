@@ -14,6 +14,7 @@ services:
         image: eolinker/eolinker-api-management-system:4.0
         restart: always
         container_name: eolinker_os
+        user: root
         ports:
             - 80:80
             - 3306:3306
