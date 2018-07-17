@@ -7,11 +7,10 @@ k_username=wim
 
 # 安装基础应用
 pacman -Syyu
-# yaourt -S base-devel perl lua51 python2 vim fcitx unzip unrar curl epdfview
-yaourt -S docker docker-compose cmake subversion git mercurial valgrind gdb luajit python3 python-pip python2-pip lsof nload tcpdump lrzsz tmux calc create_ap create_ap-gui doxygen graphviz dos2unix zip unrar wget gnu-netcat wine winetricks adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im maven gradle atom eclipse-jee qtcreator mysql-workbench mysql-utilities freerdp
+yaourt -S docker docker-compose lrzsz tmux calc create_ap create_ap-gui dos2unix zip unrar wget gnu-netcat adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im fcitx unzip unrar curl epdfview base-devel multilib-devel perl lua51 lua52 luajit python2 python3 python-pip python2-pip jdk8-openjdk subversion git mercurial cmake maven gradle valgrind gdb vim lsof nload tcpdump doxygen graphviz
 
 # 安装扩展应用
-# yaourt -S remmina wireshark-qt meld shadowsocks-qt5 shadowsocks chromium firefox filezilla thunderbird google-webdesigner devdocs-desktop zeal gimp inkscape fcitx-sogoupinyin gitkraken kdesvn pepper-flash android-studio dbeaver-ee packetsender soapui jmeter appimage-git wps-office pencil freeplane drawio-desktop-bin electronic-wechat gitter nutstore teamviewer youdao-dict deepin-screenshot wxhexeditor gvim netbeans intellij-idea-ultimate-edition pycharm-professional webstorm vlc steam davinci-resolve
+# yaourt -S fcitx-sogoupinyin wine winetricks electronic-wechat gitter nutstore teamviewer youdao-dict vlc steam deepin-screenshot pepper-flash meld wps-office pencil freeplane drawio-desktop-bin google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim atom eclipse-jee qtcreator mysql-workbench mysql-utilities android-studio dbeaver-ee netbeans intellij-idea-ultimate-edition pycharm-professional webstorm gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
 
 # winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
 # LIBGL_DRI3_DISABLE=1 steam
