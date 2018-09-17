@@ -6,11 +6,11 @@
 k_username=wim
 
 # 安装基础应用
-pacman -Syyu
+pacman -Syy && pacman -Syu
 yaourt -S docker docker-compose lrzsz tmux calc create_ap create_ap-gui dos2unix zip unrar wget gnu-netcat adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im fcitx unzip unrar curl epdfview base-devel perl lua51 lua52 luajit python2 python3 python-pip python2-pip jdk8-openjdk mysql-utilities subversion git mercurial cmake maven gradle valgrind gdb vim lsof nload tcpdump doxygen graphviz
 
 # 安装扩展应用
-# yaourt -S fcitx-sogoupinyin wine winetricks electronic-wechat gitter nutstore youdao-dict vlc steam deepin-screenshot pepper-flash diffmerge wps-office mockingbot drawio-desktop-bin freeplane plantuml pencil google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim atom eclipse-jee qtcreator mysql-workbench android-studio dbeaver netbeans intellij-idea-ultimate-edition pycharm-professional webstorm clion gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
+# yaourt -S fcitx-sogoupinyin wine winetricks electronic-wechat gitter nutstore everpad youdao-dict vlc steam deepin-screenshot pepper-flash diffmerge wps-office mockingbot drawio-desktop-bin freeplane plantuml pencil google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim atom eclipse-jee qtcreator mysql-workbench android-studio dbeaver netbeans intellij-idea-ultimate-edition pycharm-professional webstorm clion gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
 
 # winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
 # LIBGL_DRI3_DISABLE=1 steam
@@ -21,6 +21,10 @@ pip install --upgrade backports.ssl_match_hostname
 systemctl enable docker.service
 systemctl start docker.service
 gpasswd -a ${k_username} docker
+
+# 安装字体
+wget -c https://raw.githubusercontent.com/liwangmj/devops/master/tools/wps_symbol_fonts.zip
+unzip wps_symbol_fonts.zip -d /usr/share/fonts/
 
 # 配置aliyun的docker加速器
 mkdir -p /etc/docker
