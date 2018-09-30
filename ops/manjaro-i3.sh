@@ -10,7 +10,7 @@ pacman -Syy && pacman -Syu
 yaourt -S yay base-devel crosstool-ng ptxdist perl lua51 lua52 luajit python2 python3 python-pip python2-pip jdk8-openjdk gcc-go php composer php-fpm xdebug mysql-utilities subversion git mercurial cmake maven gradle valgrind gdb cppcheck vim lsof nload tcpdump doxygen graphviz docker docker-compose lrzsz tmux calc create_ap create_ap-gui dos2unix zip unrar wget gnu-netcat adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im fcitx unzip unrar curl epdfview
 
 # 安装扩展应用
-# yaourt -S fcitx-sogoupinyin wine winetricks electronic-wechat gitter nutstore everpad youdao-dict vlc steam deepin-screenshot pepper-flash diffmerge wps-office mockingbot drawio-desktop-bin freeplane plantuml pencil google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim visual-studio-code-bin eclipse-jee qtcreator android-studio mysql-workbench dbeaver jlink stlink stm32cubemx netbeans intellij-idea-ultimate-edition pycharm-professional webstorm clion gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
+# yaourt -S fcitx-sogoupinyin wine winetricks electronic-wechat gitter nutstore everpad youdao-dict vlc steam deepin-screenshot pepper-flash diffmerge wps-office ttf-wps-fonts mockingbot drawio-desktop-bin freeplane plantuml pencil google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim visual-studio-code-bin eclipse-jee qtcreator android-studio mysql-workbench dbeaver jlink stlink stm32cubemx netbeans intellij-idea-ultimate-edition pycharm-professional webstorm clion goland gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
 
 # winetricks mfc42 vb6run vcrun6 vcrun2003 vcrun2005 vcrun2008 ie6 allfonts gdiplus
 # LIBGL_DRI3_DISABLE=1 steam
@@ -29,10 +29,6 @@ if [[ -z "$(ls /etc/pacman.conf.ibak)" ]]; then
     \cp -f /etc/pacman.conf /etc/pacman.conf.ibak
     sed -i "s/#Color/Color/g" /etc/pacman.conf
 fi
-
-# 安装字体
-wget -c https://raw.githubusercontent.com/liwangmj/devops/master/tools/wps_symbol_fonts.zip
-unzip wps_symbol_fonts.zip -d /usr/share/fonts/
 
 # 配置aliyun的docker加速器
 mkdir -p /etc/docker
@@ -151,8 +147,7 @@ chmod 600 ~/.ssh/authorized_keys
 EOF
 
 # 清理
-yaourt -Qdt
-pacman -Scc
+paccache -rk 2
 rm -rf /tmp/*
 
 exit 0
