@@ -7,7 +7,7 @@ k_username=wim
 
 # 安装基础应用
 pacman -Syy && pacman -Syu
-yaourt -S yay base-devel crosstool-ng ptxdist ctags shfmt shellcheck perl lua51 lua52 lua luajit luasheck luarocks python2 python3 python-pip python2-pip jdk8-openjdk gcc-go php composer php-fpm xdebug mysql-utilities subversion git mercurial cmake maven gradle valgrind gdb cppcheck vim lsof nload tcpdump doxygen graphviz docker docker-compose lrzsz tmux calc create_ap create_ap-gui dos2unix zip unrar wget gnu-netcat adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im fcitx unzip unrar curl epdfview
+yaourt -S yay base-devel crosstool-ng ptxdist ctags shfmt shellcheck perl lua51 lua52 lua luajit luacheck luarocks python2 python3 python-pip python2-pip jdk8-openjdk gcc-go nodejs npm php composer php-fpm xdebug mysql-utilities subversion git mercurial cmake maven gradle valgrind gdb cppcheck vim lsof nload tcpdump doxygen graphviz docker docker-compose lrzsz tmux calc create_ap create_ap-gui dos2unix zip unrar wget gnu-netcat adobe-source-code-pro-fonts wqy-microhei fcitx-configtool kcm-fcitx fcitx-im fcitx unzip unrar curl epdfview
 
 # 安装扩展应用
 # yaourt -S fcitx-sogoupinyin wine winetricks anydesk electronic-wechat gitter nutstore everpad youdao-dict vlc steam deepin-screenshot pepper-flash diffmerge wps-office ttf-wps-fonts mockingbot drawio-desktop-bin freeplane plantuml pencil google-webdesigner gimp inkscape blender davinci-resolve freecad devdocs-desktop zeal appimage-git wxhexeditor gvim visual-studio-code-bin eclipse-jee qtcreator android-studio mysql-workbench dbeaver jlink stlink stm32cubemx netbeans intellij-idea-ultimate-edition pycharm-professional webstorm clion goland gitkraken kdesvn soapui jmeter chromedriver chromium firefox freerdp remmina wireshark-qt shadowsocks-qt5 shadowsocks packetsender filezilla thunderbird
@@ -23,6 +23,7 @@ systemctl start docker.service
 gpasswd -a ${k_username} docker
 
 pip2 install --upgrade pylint wheel aos-cube constant
+npm install -g eslint tslint
 
 # pacman彩色输出
 if [[ -z "$(ls /etc/pacman.conf.ibak)" ]]; then
