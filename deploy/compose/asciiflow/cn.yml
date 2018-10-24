@@ -1,14 +1,14 @@
-version: '2'
+version: "2"
 services:
-    app:
-        image: daocloud.io/liwangmj/asciiflow:latest
-        container_name: asciiflow
-        restart: always
-        network_mode: 'host'
-        dns:
-            - 114.114.114.114
-            - 8.8.8.8
-        expose:
-            - '10100'
-        ports:
-            - '127.0.0.1:10100:10100'
+  app:
+    image: daocloud.io/liwangmj/asciiflow:latest
+    container_name: asciiflow
+    restart: always
+    network_mode: "host"
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    expose:
+      - "10100"
+    ports:
+      - "127.0.0.1:10100:10100"

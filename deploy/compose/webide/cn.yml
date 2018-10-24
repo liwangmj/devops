@@ -1,16 +1,16 @@
-version: '2'
+version: "2"
 services:
-    app:
-        image: webide/webide:latest
-        container_name: webide
-        restart: always
-        volumes:
-            - /persistent_data/liwangmj/webide/.coding-ide:/root/.coding-ide
-        network_mode: 'host'
-        dns:
-            - 114.114.114.114
-            - 8.8.8.8
-        expose:
-            - '8080'
-        ports:
-            - '127.0.0.1:8080:8080'
+  app:
+    image: webide/webide:latest
+    container_name: webide
+    restart: always
+    volumes:
+      - /persistent_data/liwangmj/webide/.coding-ide:/root/.coding-ide
+    network_mode: "host"
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    expose:
+      - "8080"
+    ports:
+      - "127.0.0.1:8080:8080"

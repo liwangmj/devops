@@ -1,16 +1,16 @@
-version: '2'
+version: "2"
 services:
-    cache:
-        image: daocloud.io/liwangmj/blog-redis:latest
-        container_name: blog-redis
-        restart: always
-        volumes:
-            - /persistent_data/liwangmj/blog-redis/data:/usr/local/redis/data
-        network_mode: 'host'
-        dns:
-            - 114.114.114.114
-            - 8.8.8.8
-        expose:
-            - '15180'
-        ports:
-            - '127.0.0.1:15180:15180'
+  cache:
+    image: daocloud.io/liwangmj/blog-redis:latest
+    container_name: blog-redis
+    restart: always
+    volumes:
+      - /persistent_data/liwangmj/blog-redis/data:/usr/local/redis/data
+    network_mode: "host"
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    expose:
+      - "15180"
+    ports:
+      - "127.0.0.1:15180:15180"

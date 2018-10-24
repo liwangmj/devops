@@ -1,0 +1,18 @@
+version: '2'
+services:
+  gitlab:
+    image: 'star7th/showdoc:latest'
+    container_name: showdoc
+    restart: unless-stopped
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    ports:
+      - '4999:80'
+    volumes:
+      - /persistent_data/showdoc_data/html:/var/www/html
+
+# mkdir -p /persistent_data/showdoc_data/html
+# chmod 777 -R /persistent_data/showdoc_data
+# docker exec showdoc \cp -fr /showdoc_data/html/ /var/www/
+# chmod 777 -R /persistent_data/showdoc_data
