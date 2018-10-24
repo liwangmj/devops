@@ -1,6 +1,6 @@
 version: '2'
 services:
-  gitlab:
+  showdoc:
     image: 'star7th/showdoc:latest'
     container_name: showdoc
     restart: unless-stopped
