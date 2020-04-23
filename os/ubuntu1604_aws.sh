@@ -1,53 +1,41 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+# Author: Mason Lee <i@liwmj.com> (https://liwmj.com)
 
-k_username=super
-
-# 增加用户
-groupadd ${k_username}
-useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
+k_username=ubuntu
 
 # 安装基础应用
-yum -y install epel-release net-tools wget curl
-yum -y update && yum -y upgrade && yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua lua-devel luajit luajit-devel luarocks python python-devel python-setuptools python-pip valgrind gdb tcpdump nload git svn ntpdate cronie openssh-server watchdog
+apt-get -y install net-tools wget curl
+apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
+update-alternatives --config nc
 pip install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
 
+# 设置git
+git config --global credential.helper store
+
 # 安装docker相关
-# 注意：
-# 官方软件源默认启用了最新的软件，您可以通过编辑软件源的方式获取各个版本的软件包。例如官方并没有将测试版本的软件源置为可用，你可以通过以下方式开启。同理可以开启各种测试版本等。
-# vim /etc/yum.repos.d/docker-ce.repo
-#   将 [docker-ce-test] 下方的 enabled=0 修改为 enabled=1
-#
 # 安装指定版本的Docker-CE:
 # Step 1: 查找Docker-CE的版本:
-# yum list docker-ce.x86_64 --showduplicates | sort -r
-#   Loading mirror speeds from cached hostfile
-#   Loaded plugins: branch, fastestmirror, langpacks
-#   docker-ce.x86_64            17.03.1.ce-1.el7.centos            docker-ce-stable
-#   docker-ce.x86_64            17.03.1.ce-1.el7.centos            @docker-ce-stable
-#   docker-ce.x86_64            17.03.0.ce-1.el7.centos            docker-ce-stable
-#   Available Packages
-# Step2 : 安装指定版本的Docker-CE: (VERSION 例如上面的 17.03.0.ce.1-1.el7.centos)
-# sudo yum -y install docker-ce-[VERSION]
-yum -y install yum-utils device-mapper-persistent-data lvm2
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-yum makecache fast
-yum -y install docker-ce
-yum -y update && yum -y upgrade
+# apt-cache madison docker-ce
+#   docker-ce | 17.03.1~ce-0~ubuntu-xenial | http://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial/stable amd64 Packages
+#   docker-ce | 17.03.0~ce-0~ubuntu-xenial | http://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial/stable amd64 Packages
+# Step 2: 安装指定版本的Docker-CE: (VERSION 例如上面的 17.03.1~ce-0~ubuntu-xenial)
+# sudo apt-get -y install docker-ce=[VERSION]
+apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
+apt-get -y install apt-transport-https ca-certificates software-properties-common
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+apt-get -y update && apt-get -y upgrade
+apt-get -y install docker-ce
 pip install docker-compose
 systemctl enable docker.service
 systemctl start docker.service
-groupadd docker
 gpasswd -a ${k_username} docker
 
 # 关闭防火墙
-setenforce 0
-sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
-systemctl stop firewalld.service
-systemctl disable firewalld.service
+ufw disable
 
 # 配置aliyun的docker加速器
 mkdir -p /etc/docker
@@ -101,22 +89,13 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     systemctl restart sshd.service
 fi
 
-# 设置ssh公钥并发送私钥
-su - ${k_username} <<-'EOF'
-rm -rf ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 -R ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-EOF
-
 # 设置sudo
 chmod 740 /etc/sudoers
-sed -i '/## Allow root to run any commands anywhere/a'"${k_username}"' ALL=(ALL) NOPASSWD: ALL' /etc/sudoers
+sed -i 's/^.*%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 chmod 0440 /etc/sudoers
 
 # 清理
-yum clean all
+apt-get clean && apt-get autoclean
 rm -rf /tmp/*
 
 exit 0

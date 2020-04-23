@@ -1,0 +1,36 @@
+version: "2"
+services:
+  redis:
+    image: "redis:5.0"
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - /persistent_data/com/liwmj/redis/data:/data
+    network_mode: host
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+  consul:
+    image: consul:latest
+    container_name: consul
+    restart: unless-stopped
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+      CONSUL_CONFIG_DIR: /etc/consul
+      CONSUL_DATA_DIR: /var/lib/consul
+    command: agent -server -bootstrap-expect=1 -node=node1 -client 0.0.0.0 -ui
+    volumes:
+      - /persistent_data/com/liwmj/consul/config:/etc/consul
+      - /persistent_data/com/liwmj/consul/data:/var/lib/consul
+    network_mode: host
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    ports:
+      - 127.0.0.1:8300:8300
+      - 127.0.0.1:8400:8400
+      - 127.0.0.1:8500:8500
+      - 127.0.0.1:8600:8600

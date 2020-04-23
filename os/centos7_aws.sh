@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+# Author: Mason Lee <i@liwmj.com> (https://liwmj.com)
 
 k_username=centos
 
 # 安装基础应用
-yum -y install epel-release net-tools wget curl
-yum -y update && yum -y upgrade && yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua lua-devel luajit luajit-devel luarocks python python-devel python-setuptools python-pip valgrind gdb tcpdump nload git svn ntpdate cronie openssh-server watchdog
+yum -y install epel-release net-tools wget curl && yum -y install yum-utils && yum-config-manager --enable epel
+yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua lua-devel luajit luajit-devel luarocks python python-devel python-setuptools python-pip valgrind gdb tcpdump nload git svn ntpdate crontabs cronie openssh-server watchdog
 pip install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
+
+# 设置git
+git config --global credential.helper store
+
+# 设置默认字符
+localedef -c -i en_US -f UTF-8 en_US.UTF-8
 
 # 安装docker相关
 # 注意：

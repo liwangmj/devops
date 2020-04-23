@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+# Author: Mason Lee <i@liwmj.com> (https://liwmj.com)
 
-k_username=super
-
-# 增加用户
-groupadd ${k_username}
-useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
-gpasswd -a ${k_username} sudo
+k_username=ubuntu
 
 # 安装基础应用
 apt-get -y install net-tools wget curl
-apt-get -y update && apt-get -y upgrade && apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
+apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
 update-alternatives --config nc
 pip install --upgrade setuptools pip
 pip install --upgrade backports.ssl_match_hostname
+
+# 设置git
+git config --global credential.helper store
 
 # 安装docker相关
 # 安装指定版本的Docker-CE:
@@ -89,15 +87,6 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     update-rc.d sshd defaults
     service sshd restart
 fi
-
-# 设置ssh公钥并发送私钥
-su - ${k_username} <<-'EOF'
-rm -rf ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 -R ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-EOF
 
 # 设置sudo
 chmod 740 /etc/sudoers

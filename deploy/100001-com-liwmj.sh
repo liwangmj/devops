@@ -7,15 +7,15 @@ function deploy_common() {
         ./del.sh asciiflow cn
         ./del.sh intellij-idea-license-server cn
         ./del.sh webide cn
-        ./del.sh blog-redis cn
-        ./del.sh blog cn
+        ./del.sh redis cn
+        ./del.sh service_openresty_site cn
 
     else
         ./reup.sh asciiflow cn
         ./reup.sh intellij-idea-license-server cn
         ./reup.sh webide cn
-        ./reup.sh blog-redis cn
-        ./reup.sh blog cn
+        ./reup.sh redis cn
+        ./reup.sh service_openresty_site cn
     fi
 
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+# Author: Mason Lee <i@liwmj.com> (https://liwmj.com)
 
 k_username=wim
 
@@ -24,6 +24,9 @@ gpasswd -a ${k_username} docker
 
 pip2 install --upgrade pylint wheel aos-cube constant
 npm install -g eslint tslint
+
+# 设置git
+git config --global credential.helper store
 
 # pacman彩色输出
 if [[ -z "$(ls /etc/pacman.conf.ibak)" ]]; then

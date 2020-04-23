@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 #
-# Author: Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+# Author: Mason Lee <i@liwmj.com> (https://liwmj.com)
 
 k_username=super
 
@@ -10,10 +10,16 @@ groupadd ${k_username}
 useradd -G ${k_username} -g ${k_username} -s /bin/bash -m ${k_username}
 
 # 安装基础应用
-yum -y install epel-release net-tools wget curl
-yum -y update && yum -y upgrade && yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua lua-devel luajit luajit-devel luarocks python python-devel python-setuptools python-pip valgrind gdb tcpdump nload git svn ntpdate cronie openssh-server watchdog
-pip install --upgrade setuptools pip
-pip install --upgrade backports.ssl_match_hostname
+yum -y install epel-release net-tools wget curl && yum -y install yum-utils && yum-config-manager --enable epel
+yum -y install gcc gcc-c++ vim make automake libtool cmake tar unzip patch lsof lrzsz jq nc bind-utils perl perl-CPAN lua luajit luajit-devel python2 python2-devel python3 python3-devel python3-setuptools python3-pip valgrind gdb tcpdump nload git svn crontabs cronie openssh-server watchdog glibc-locale-source glibc-langpack-en
+python3 -m pip install --upgrade setuptools pip
+python3 -m pip install --upgrade backports.ssl_match_hostname
+
+# 设置git
+git config --global credential.helper store
+
+# 设置默认字符
+localedef -c -i en_US -f UTF-8 en_US.UTF-8
 
 # 安装docker相关
 # 注意：
@@ -32,23 +38,22 @@ pip install --upgrade backports.ssl_match_hostname
 #   Available Packages
 # Step2 : 安装指定版本的Docker-CE: (VERSION 例如上面的 17.03.0.ce.1-1.el7.centos)
 # sudo yum -y install docker-ce-[VERSION]
-yum -y install yum-utils device-mapper-persistent-data lvm2
+yum -y install device-mapper-persistent-data lvm2
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum makecache fast
 yum -y install docker-ce
 yum -y update && yum -y upgrade
-pip install docker-compose
-chkconfig --add docker
-chkconfig docker on
-service docker start
+python3 -m pip install docker-compose
+systemctl enable docker.service
+systemctl start docker.service
 groupadd docker
 gpasswd -a ${k_username} docker
 
 # 关闭防火墙
 setenforce 0
 sed -i '/SELINUX/s/enforcing/disabled/' /etc/selinux/config
-service firewalld stop
-chkconfig firewalld off
+systemctl stop firewalld.service
+systemctl disable firewalld.service
 
 # 配置aliyun的docker加速器
 mkdir -p /etc/docker
@@ -57,7 +62,8 @@ tee /etc/docker/daemon.json <<-'EOF'
   "registry-mirrors": ["https://rbhx2eui.mirror.aliyuncs.com"]
 }
 EOF
-service docker restart
+systemctl daemon-reload
+systemctl restart docker.service
 
 # 配置ulimit
 if [[ -z "$(ls /etc/security/limits.d/local.conf.ibak)" ]]; then
@@ -97,9 +103,8 @@ if [[ -z "$(ls /etc/ssh/sshd_config.ibak)" ]]; then
     sed -i 's/#PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config
     echo 'sshd:all' >> /etc/hosts.deny
     echo 'sshd:all' >> /etc/hosts.allow
-    chkconfig --add sshd
-    chkconfig sshd on
-    service sshd restart
+    systemctl enable sshd.service
+    systemctl restart sshd.service
 fi
 
 # 设置ssh公钥并发送私钥
