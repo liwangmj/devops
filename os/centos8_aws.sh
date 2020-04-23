@@ -36,7 +36,7 @@ localedef -c -i en_US -f UTF-8 en_US.UTF-8
 # sudo yum -y install docker-ce-[VERSION]
 yum -y install yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-yum makecache fast
+yum makecache
 yum -y install docker-ce
 yum -y update && yum -y upgrade
 python3 -m pip install docker-compose
