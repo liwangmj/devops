@@ -1,0 +1,12 @@
+version: "2"
+services:
+  asciiflow:
+    image: registry.cn-hangzhou.aliyuncs.com/liwmj/asciiflow:latest
+    container_name: asciiflow
+    restart: unless-stopped
+    network_mode: host
+    dns:
+      - 114.114.114.114
+      - 8.8.8.8
+    ports:
+      - 127.0.0.1:10100:10100

@@ -4,13 +4,13 @@ function reup_common() {
     cd $(dirname $0)/$1
 
     if [[ "${2}" == "asia" ]]; then
-        docker-compose -f asia.yml pull
-        docker-compose -f asia.yml down
-        docker-compose -f asia.yml up -d
+        docker-compose -f $1-asia.yml pull
+        docker-compose -f $1-asia.yml down
+        docker-compose -f $1-asia.yml up -d
     else
-        docker-compose -f cn.yml pull
-        docker-compose -f cn.yml down
-        docker-compose -f cn.yml up -d
+        docker-compose -f $1-cn.yml pull
+        docker-compose -f $1-cn.yml down
+        docker-compose -f $1-cn.yml up -d
     fi
 
     if [[ -n $(docker images | grep none) ]]; then
@@ -21,7 +21,7 @@ function reup_common() {
 function reup_help() {
     echo "[error] unknown args: $1"
     echo "please input args, example './reup.sh service_openresty_site cn'"
-    echo "arg1: 'service_openresty_site' 'redis' 'asciiflow' 'intellij-idea-license-server' 'webide' "
+    echo "arg1: 'service_openresty_site' 'redis' 'consul' 'webide' 'intellij-idea-license-server' 'asciiflow' "
     echo "arg2: 'cn' 'asia'"
     echo "arg2 default is 'cn'"
     exit 0
@@ -31,9 +31,10 @@ function reup_help() {
 case $1 in
     service_openresty_site \
     | redis \
-    | asciiflow \
+    | consul \
+    | intellij-idea-license-server \
     | webide \
-    | intellij-idea-license-server) ;;
+    | asciiflow) ;;
     *) reup_help "$0" ;;
 esac
 

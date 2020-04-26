@@ -3,7 +3,6 @@ services:
   service_openresty_site:
     image: registry.cn-hangzhou.aliyuncs.com/liwmj/service_openresty_site:latest
     container_name: service_openresty_site
-    privileged: true
     restart: unless-stopped
     volumes:
       - /persistent_data/com/liwmj/nginx/logs:/com/liwmj/nginx/logs
@@ -16,6 +15,3 @@ services:
     ports:
       - 127.0.0.1:80:80
       - 127.0.0.1:443:443
-    depends_on:
-      - redis
-      - consul
