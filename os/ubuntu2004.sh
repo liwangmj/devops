@@ -12,10 +12,10 @@ gpasswd -a ${k_username} sudo
 
 # 安装基础应用
 apt-get -y install net-tools wget curl
-apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python python-setuptools python-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
+apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python3 python3-setuptools python3-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
 update-alternatives --config nc
-pip install --upgrade setuptools pip
-pip install --upgrade backports.ssl_match_hostname
+python3 -m pip install --upgrade setuptools pip
+python3 -m pip install --upgrade backports.ssl_match_hostname
 
 # 设置git
 git config --global credential.helper store
@@ -34,7 +34,7 @@ curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key a
 add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 apt-get -y update && apt-get -y upgrade
 apt-get -y install docker-ce
-pip install docker-compose
+python3 -m pip install docker-compose
 systemctl enable docker.service
 systemctl start docker.service
 gpasswd -a ${k_username} docker
