@@ -15,7 +15,6 @@ apt-get -y install net-tools wget curl
 apt-get -y install aptitude build-essential vim automake libtool cmake tar unzip patch lsof lrzsz jq netcat-traditional perl perl-modules lua5.1 luajit luarocks python3 python3-setuptools python3-pip valgrind tcpdump nload git subversion ntpdate cron openssh-server watchdog
 update-alternatives --config nc
 python3 -m pip install --upgrade setuptools pip
-python3 -m pip install --upgrade backports.ssl_match_hostname
 
 # 设置git
 git config --global credential.helper store
